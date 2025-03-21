@@ -1,7 +1,9 @@
 node {
+    def branch = 'main'
+
     stage('Checkout') {
         // Checkout code from the main branch of the Git repository
-        git url: 'https://github.com/sikkumishra1993/Jenkins.git', branch: 'master'
+        git url: 'https://github.com/sikkumishra1993/Jenkins.git', branch: branch
     }
 
     stage('Build') {
@@ -23,16 +25,11 @@ node {
     }
 
     // Post-build actions
-    post {
-        always {
-            echo 'Cleaning up...'
-            cleanWs()
-        }
-        success {
-            echo 'Build succeeded!'
-        }
-        failure {
-            echo 'Build failed!'
-        }
+    echo 'Cleaning up...'
+    cleanWs()
+    if (currentBuild.result == 'SUCCESS') {
+        echo 'Build succeeded!'
+    } else {
+        echo 'Build failed!'
     }
 }
