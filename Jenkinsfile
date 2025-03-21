@@ -1,3 +1,4 @@
+import com.example.HelloWorld
 pipeline {
     agent { label 'first-jenkins' }
 
