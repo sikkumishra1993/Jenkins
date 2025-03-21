@@ -6,8 +6,7 @@ pipeline {
             steps {
                 echo 'Building...'
                  script {
-                    sh 'javac HelloWorld.java'
-                    sh 'java HelloWorld'
+                    sh './build.sh'
                 }
                 // Add your build commands here
             }
