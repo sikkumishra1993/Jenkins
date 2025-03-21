@@ -17,13 +17,19 @@ pipeline {
 
         stage('parallel-build') {
             parallel{
-                stage('Lin-Build'){
-                    echo "Linux Build"
-                    Sleep 100
+                stage('Build on Linux') {
+                    agent any
+                    steps {
+                        echo "Building on Linux"
+                        sleep 100
+                    }
                 }
-                stage('Win-Build'){
-                    echo "Windows Build"
-                    Sleep 100
+                stage('Build on Windows') {
+                    agent any
+                    steps {
+                        echo "Building on Linux"
+                        sleep 100
+                    }
                 }
             }
         }
