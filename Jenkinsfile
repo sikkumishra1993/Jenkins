@@ -1,35 +1,43 @@
-node {
-    def branch = 'master'
-
-    stage('Checkout') {
-        // Checkout code from the main branch of the Git repository
-        git url: 'https://github.com/sikkumishra1993/Jenkins.git', branch: branch
+pipeline
+{
+agent { label 'master' }
+parameters {
+        string(name: 'PARAM1', defaultValue: 'default_value', description: 'Enter a string parameter')
+        booleanParam(name: 'FLAG', defaultValue: true, description: 'Select a boolean flag')
+        choice(name: 'CHOICE', choices: ['Option1', 'Option2', 'Option3'], description: 'Select an option')
     }
+stages{
 
-    stage('Build') {
-        echo 'Building...'
-        script {
-            sh 'chmod +x build.sh'
-            sh './build.sh'
+    stage('build'){
+        steps{
+            echo 'Building project'
         }
     }
-
-    stage('Test') {
-        echo 'Testing...'
-        // Add your test commands here
+    stage('test'){
+        steps{
+            echo 'Testing project'
+        }
     }
-
-    stage('Deploy') {
-        echo 'Deploying...'
-        // Add your deploy commands here
+    stage('deploy'){
+        steps{
+            echo 'Deploying project'
+        }
     }
+}
 
-    // Post-build actions
-    echo 'Cleaning up...'
-    cleanWs()
-    if (currentBuild.result != 'FAILED') {
-        echo 'Build succeeded!'
-    } else {
-        echo 'Build failed!'
+post{
+
+    always{
+
+        echo 'cleaning up'
+        cleanWs()
     }
+    success{
+        echo "Success"
+    }
+    failure{
+        echo "Failure"
+    }
+}
+
 }
