@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo 'Building...'
                  script {
+                    sh 'chmod +x build.sh'
                     sh './build.sh'
                 }
                 // Add your build commands here
