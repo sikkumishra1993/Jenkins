@@ -9,7 +9,7 @@ pipeline {
                     sh 'chmod +x build.sh'
                     sh './build.sh'
                 }
-                // Add your build commands here
+                /// Add your build commands here
             }
         }
         stage('Test') {
