@@ -2,12 +2,12 @@ node {
     def branch = env.BRANCH_NAME
 
     stage('Checkout') {
-        // Checkout code from Git repository
+        // Checkout code from the branch that triggered the build
         git url: 'https://github.com/sikkumishra1993/Jenkins.git', branch: branch
     }
 
     stage('Build') {
-        echo 'Building...'
+        echo "Building branch: ${branch}"
         script {
             sh 'chmod +x build.sh'
             sh './build.sh'
