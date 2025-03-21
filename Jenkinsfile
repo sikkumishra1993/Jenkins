@@ -14,6 +14,19 @@ pipeline {
                 // Add your build steps here
             }
         }
+
+        stage('parallel-build') {
+            parallel{
+                stage('Lin-Build'){
+                    echo "Linux Build"
+                    Sleep 100
+                }
+                stage('Win-Build'){
+                    echo "Windows Build"
+                    Sleep 100
+                }
+            }
+        }
         stage('approval') {
             steps {
                 input message: 'Approve deployment?', ok: 'Deploy'
