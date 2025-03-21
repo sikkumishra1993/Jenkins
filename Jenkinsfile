@@ -1,7 +1,7 @@
 node {
     stage('Checkout') {
         // Checkout code from the main branch of the Git repository
-        git url: 'https://github.com/sikkumishra1993/Jenkins.git', branch: 'main'
+        git url: 'https://github.com/sikkumishra1993/Jenkins.git', branch: 'master'
     }
 
     stage('Build') {
