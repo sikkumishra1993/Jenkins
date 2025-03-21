@@ -1,6 +1,6 @@
 pipeline
 {
-agent { label 'master' }
+agent any
 parameters {
         string(name: 'PARAM1', defaultValue: 'default_value', description: 'Enter a string parameter')
         booleanParam(name: 'FLAG', defaultValue: true, description: 'Select a boolean flag')
