@@ -1,5 +1,5 @@
 node {
-    def branch = 'main'
+    def branch = 'master'
 
     stage('Checkout') {
         // Checkout code from the main branch of the Git repository
