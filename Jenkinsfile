@@ -27,7 +27,7 @@ node {
     // Post-build actions
     echo 'Cleaning up...'
     cleanWs()
-    if (currentBuild.result == 'SUCCESS') {
+    if (currentBuild.result != 'FAILED') {
         echo 'Build succeeded!'
     } else {
         echo 'Build failed!'
