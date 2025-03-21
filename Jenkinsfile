@@ -14,6 +14,11 @@ pipeline {
                 // Add your build steps here
             }
         }
+        stage('approval') {
+            steps {
+                input message: 'Approve deployment?', ok: 'Deploy'
+            }
+        }
         stage('test') {
             steps {
                 echo 'Testing...'
