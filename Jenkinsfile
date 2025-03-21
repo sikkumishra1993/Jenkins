@@ -1,37 +1,46 @@
-pipeline {
-    agent { label 'first-jenkins' }
+node {
+    def branch = env.BRANCH_NAME
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                 script {
-                    sh 'chmod +x build.sh'
-                    sh './build.sh'
-                }
-                /// Add your build commands here
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                // Add your test commands here
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                // Add your deploy commands here
+    stage('Checkout') {
+        // Checkout code from Git repository
+        git url: 'https://github.com/your-repo.git', branch: branch
+    }
+
+    stage('Build') {
+        steps {
+            echo 'Building...'
+            script {
+                sh 'chmod +x build.sh'
+                sh './build.sh'
             }
         }
     }
 
+    stage('Test') {
+        steps {
+            echo 'Testing...'
+            // Add your test commands here
+        }
+    }
+
+    stage('Deploy') {
+        steps {
+            echo 'Deploying...'
+            // Add your deploy commands here
+        }
+    }
+
+    // Post-build actions
     post {
+        always {
+            echo 'Cleaning up...'
+            cleanWs()
+        }
         success {
-            echo 'Pipeline succeeded!'
+            echo 'Build succeeded!'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo 'Build failed!'
         }
     }
 }
