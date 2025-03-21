@@ -1,4 +1,3 @@
-import com.example.HelloWorld
 pipeline {
     agent { label 'first-jenkins' }
 
@@ -6,8 +5,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                Javac HelloWorld.java
-                Java HelloWorld
+                 script {
+                    sh 'javac HelloWorld.java'
+                    sh 'java HelloWorld'
+                }
                 // Add your build commands here
             }
         }
