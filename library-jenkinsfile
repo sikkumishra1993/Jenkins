@@ -1,28 +1,5 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Load and Use Shared Library') {
-            steps {
-                script {
-                    // Load the library script
-                    def myLibrary = load './vars/myFunction.groovy'
-                    
-                    // Debugging: Check if the library is loaded
-                    if (myLibrary) {
-                        echo "Library loaded successfully"
-                        // Check if the function exists
-                        if (myLibrary.metaClass.respondsTo(myLibrary, 'myFunction')) {
-                            // Call the function from the library
-                            myLibrary.myFunction()
-                        } else {
-                            error "Function myFunction() not found in myLibrary.groovy"
-                        }
-                    } else {
-                        error "Failed to load myLibrary.groovy"
-                    }
-                }
-            }
-        }
-    }
-}
+@Library('pipeline-library-demo')_
+ stage('Demo') {
+     echo 'Hello world'
+     sayHello 'Alex'
+ }
