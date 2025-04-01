@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Load the library script
-                    def myLibrary = load 'myLibrary.groovy'
+                    def myLibrary = load './myLibrary.groovy'
                     
                     // Debugging: Check if the library is loaded
                     if (myLibrary) {
